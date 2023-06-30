@@ -1,5 +1,7 @@
 This is a Flask Web App Project
 
+![AgricTrack](https://drive.google.com/file/d/11464BLr5mTzT7V3vFBdQoaws7AodeIA6/view?usp=sharing)
+
 # AgricTrack App
 AgricTrack project is a Farm Web App that provides farmers with a todo list and live weather reports. It aims to assist farmers in managing their daily tasks and staying updated on weather conditions that may affect their farming activities.
 
@@ -24,10 +26,10 @@ Weather information is specific to the farmer's location, ensuring accurate and 
 ## User Authentication: 
 Users can create accounts and securely log in to access their personalized todo list and weather reports.
 
-##Future Possibilities
+# Future Possibilities
 The Farm Web App has potential for further enhancements and features, including:
 
-##Crop Management: 
+## Crop Management: 
 Integration with crop databases to provide farmers with information on crop-specific tasks, planting seasons, and best practices.
 
 ## Notifications and Reminders: 
