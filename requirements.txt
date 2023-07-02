@@ -1,3 +1,5 @@
 Flask
 requests
 flask-sqlalchemy
+flask-wtf
+wtforms
