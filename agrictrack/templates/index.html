@@ -43,8 +43,12 @@
           <div class="hidden md:block">
             <!-- Login and Registration Buttons -->
             <div class="ml-4 flex items-center">
-              <a href="/login" class="p-2 px-6 pt-2 text-white hover:bg-mdgr transition duration-700 rounded-xl baseline">LOGIN</a>
-              <a href="{{ url_for('register') }}" class="p-3 px-4 pt-2 text-white bg-mdgr rounded-xl baseline hover:bg-hvgr transition duration-700">REGISTER</a>
+              {% if current_user.is_authenticated %}
+                <a href="{{ url_for('logout') }}" class="p-2 px-6 pt-2 text-white hover:bg-mdgr transition duration-700 rounded-xl baseline">LOG OUT</a>
+              {% else %}
+                <a href="{{ url_for('login') }}" class="p-2 px-6 pt-2 text-white hover:bg-mdgr transition duration-700 rounded-xl baseline">LOGIN</a>
+                <a href="{{ url_for('register') }}" class="p-3 px-4 pt-2 text-white  rounded-xl baseline hover:bg-mdgr transition duration-700">REGISTER</a>
+              {% endif %}
             </div>
           </div>
           <div class="md:hidden">
@@ -73,6 +77,7 @@
     <!-- Hero Section -->
     <br/><br/><br/>
     <section id="hero">
+      
       <div class="container flex flex-col font-serif text-mdgr max-w-7xl mx-auto px-4 sm:px-6 md: px-12 lg:px-10 pt-5 lg:flex-row items-center justify-between px-1 mx-auto mt-10 space-y-0">
         <!-- Left Item -->
         <div class="flex flex-col mb-40 space-y-3 md:space-y-3">
