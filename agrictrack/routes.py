@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request
 from agrictrack.forms import RegistrationForm, LoginForm
 from agrictrack import app, db, bcrypt
 from agrictrack.models import User
-from flask_login import login_user, current_user, logout_user
+from flask_login import login_user, current_user, logout_user, login_required
 
 
 
@@ -26,6 +26,7 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
+
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -35,8 +36,8 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
            login_user(user, remember=form.remember.data)
-           #next_page = request.args.get('next')
-           return redirect(url_for('home'))
+           next_page = request.args.get('next')
+           return redirect(next_page) if next_page else redirect(url_for('home'))
         # if  form.email.data== 'admin@mubtunj.com' and form.password.data == 'password':
         #     
         else:
@@ -48,3 +49,9 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+
+@app.route("/dashboard")
+@login_required
+def dashboard():
+    return render_template('dashboard.html')
