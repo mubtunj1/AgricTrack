@@ -1,12 +1,24 @@
 {% extends 'layout.html' %}
-  {% block content %}  
+  {% block content %}         
+
         <!-- Left section -->
         <div class="md:w-1/2 w-full bg-white flex flex-col items-center">
+            <!-- Show flashed messages -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div>{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <!-- Login -->
             <div class="max-w-md mx-auto bg-white rounded-lg p-8">
                 <h2 class="text-2xl font-bold mb-4">Login</h2>
                 <p class="text-gray-600 mb-8">Login to get full access to all our products and services</p>
               
-                <button class="flex items-center justify-center rounded-full border border-black w-full py-2 mb-6">
+                <!-- Future Update -->
+                <!-- <button class="flex items-center justify-center rounded-full border border-black w-full py-2 mb-6">
                     <img src="./static/images/google.png" class="w-5 h-5 mr-2" alt="google">
                     <span class="font-bold">Sign in with Google</span>
                   </button>
@@ -16,7 +28,7 @@
                   <div class="flex-grow border-b border-gray-300 mr-3"></div>
                   <span class="text-gray-500 hover:text-black font-bold"><a href="#">or Sign in with E-mail</a></span>
                   <div class="flex-grow border-b border-gray-300 ml-3"></div>
-                </div>
+                </div> -->
               
                 <form method="POST" action="">
                   {{ form.hidden_tag() }}
@@ -58,7 +70,7 @@
               
                 <div class="text-center mt-4">
                   <span class="text-gray-600">Not yet registered? </span>
-                  <a href="./register.html" class="text-hvgr font-bold">Create an account</a>
+                  <a href="/register" class="text-hvgr font-bold">Create an account</a>
                 </div>
               </div>              
         </div>
