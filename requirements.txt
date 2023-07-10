@@ -6,3 +6,4 @@ wtforms
 flask-login
 email-validator
 flask-bcrypt
+gunicorn
