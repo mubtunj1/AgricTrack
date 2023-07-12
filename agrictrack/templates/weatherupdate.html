@@ -131,29 +131,22 @@
 
                 <h1 class="text-3xl font-bold mb-8 text-center text-hvgr">Welcome, {{ current_user.username }} </h1>
                     <section class="md:mr-4 flex-1">
-                        <div class="min-h-screen flex items-center justify-center bg-gray-100">
-                            <div class="max-w-md bg-white p-8 rounded-md shadow-md">
-                                <h1 class="text-2xl font-bold mb-6">Weather Report</h1>
-                                <form method="POST" action="{{ url_for('weather_report') }}">
-                                    <div class="mb-4">
-                                        <label for="city" class="block mb-2">Enter city:</label>
-                                        <input type="text" id="city" name="city" required
-                                               class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                                    </div>
-                                    <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md font-bold">
-                                        Get Weather
-                                    </button>
-                                </form>
+                        <div class="flex flex-col items-center mt-10">
+                            <h1 class="text-4xl font-bold mb-4">Weather Web App</h1>
+                            <form method="post" action="/weatherupdate">
+                              <input class="border rounded p-2 mb-2" type="text" name="city" placeholder="Enter city name" required>
+                              <button class="bg-mdgr hover:bg-hvgr text-white font-bold py-2 px-4 rounded" type="submit">Get Weather</button>
+                            </form>
+                            {% if weather_data %}
+                            <div class="bg-gray-200 p-4 rounded-lg shadow-md mt-4">
+                              <h2 class="text-xl">Weather in {{ city }}</h2>
+                              <p class="text-lg">Temperature: {{ weather_data.temperature }}°C</p>
+                              <p class="text-lg">Condition: {{ weather_data.condition }}</p>
                             </div>
-                        </div>    
-                            {% if error %}
-                                <p>{{ error }}</p>
-                            {% elif city and description and temperature and humidity %}
-                                <h2>Weather in {{ city }}</h2>
-                                <p><strong>Description:</strong> {{ description }}</p>
-                                <p><strong>Temperature:</strong> {{ temperature }}°C</p>
-                                <p><strong>Humidity:</strong> {{ humidity }}%</p>
+                            {% elif error_message %}
+                            <p class="text-red-500 mt-4">{{ error_message }}</p>
                             {% endif %}
+                          </div>
                     </section>
             </div>
         </main>
