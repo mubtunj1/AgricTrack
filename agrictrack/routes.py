@@ -55,3 +55,28 @@ def logout():
 @login_required
 def dashboard():
     return render_template('dashboard.html')
+
+@app.route('/weatherupdate', methods=['GET', 'POST'])
+def weather_report():
+    if request.method == 'POST':
+        city = request.form.get('city')
+        api_key = 'cfeacba5d60826e68db04677b8ac9173'
+
+        # Make a request to the weather API
+        url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric'
+        response = requests.get(url)
+        data = response.json()
+
+        if response.status_code == 200:
+            # Parse the required weather data from the API response
+            weather_description = data['weather'][0]['description']
+            temperature = data['main']['temp']
+            humidity = data['main']['humidity']
+
+            # Render the weather report template with the fetched data
+            return render_template('weatherupdate.html', city=city, description=weather_description, temperature=temperature, humidity=humidity)
+        else:
+            error_message = data['message']
+            return render_template('weatherupdate.html', error=error_message)
+
+    return render_template('weatherupdate.html')
