@@ -63,7 +63,7 @@
                         </a>
                     </li>
                     <li class="mb-2 px-8 py-3 hover:bg-mdgr">
-                        <a href="/weatherupdate" class="flex items-center">
+                        <a href="#" class="flex items-center">
                             <svg class="w-6 h-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5l7 7-7 7"></path>
@@ -117,7 +117,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/weatherupdate" class="flex items-center text-white">
+                                <a href="#" class="flex items-center text-white">
                                     <svg class="w-6 h-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -130,25 +130,23 @@
                 </div>
 
                 <h1 class="text-3xl font-bold mb-8 text-center text-hvgr">Welcome, {{ current_user.username }} </h1>
-                <div class="p-8 flex flex-col md:flex-row">
-                    <section class="mb-8 md:mr-4 flex-1">
-                        <a href="#" class="block h-full bg-white shadow-lg rounded-lg px-6 py-8 text-center transition-all duration-300 hover:bg-gray-100">
-                            <svg class="w-12 h-12 mx-auto mb-4 text-hvgr" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                            </svg>
-                            <h3 class="text-xl font-semibold mb-2">Todo List</h3>
-                            <p class="text-gray-500">Manage your tasks and stay organized.</p>
-                        </a>
-                    </section>
-    
-                    <section class="flex-1">
-                        <a href="/weatherupdate" class="block h-full bg-white shadow-lg rounded-lg px-6 py-8 text-center transition-all duration-300 hover:bg-gray-100">
-                            <svg class="w-12 h-12 mx-auto mb-4 text-hvgr" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                            </svg>
-                            <h3 class="text-xl font-semibold mb-2">Weather Update</h3>
-                            <p class="text-gray-500">Stay updated with real-time weather information.</p>
-                        </a>
+                    <section class="md:mr-4 flex-1">
+                        <div class="flex flex-col items-center mt-10">
+                            <h1 class="text-4xl font-bold mb-4">Weather Web App</h1>
+                            <form method="post" action="/weatherupdate">
+                              <input class="border rounded p-2 mb-2" type="text" name="city" placeholder="Enter city name" required>
+                              <button class="bg-mdgr hover:bg-hvgr text-white font-bold py-2 px-4 rounded" type="submit">Get Weather</button>
+                            </form>
+                            {% if weather_data %}
+                            <div class="bg-gray-200 p-4 rounded-lg shadow-md mt-4">
+                              <h2 class="text-xl">Weather in {{ city }}</h2>
+                              <p class="text-lg">Temperature: {{ weather_data.temperature }}°C</p>
+                              <p class="text-lg">Condition: {{ weather_data.condition }}</p>
+                            </div>
+                            {% elif error_message %}
+                            <p class="text-red-500 mt-4">{{ error_message }}</p>
+                            {% endif %}
+                          </div>
                     </section>
             </div>
         </main>
