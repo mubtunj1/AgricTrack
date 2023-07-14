@@ -80,3 +80,8 @@ def get_weather_data(city):
         condition = weather_data['weather'][0]['description']
         return {'temperature': temperature, 'condition': condition}
     return None
+
+@app.route("/aboutus")
+def aboutus():
+    return render_template('aboutus.html')
+
